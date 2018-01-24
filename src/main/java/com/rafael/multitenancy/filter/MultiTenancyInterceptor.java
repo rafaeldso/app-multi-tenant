@@ -12,6 +12,7 @@ public class MultiTenancyInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
+		System.out.println(">>>> MultiTenancyInterceptor: preHandle() - Inicio");
 		@SuppressWarnings("unchecked")
 		Map<String, Object> pathVars = (Map<String, Object>) req
 				.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
@@ -19,6 +20,7 @@ public class MultiTenancyInterceptor extends HandlerInterceptorAdapter {
 		if (pathVars.containsKey("tenantid")) {
 			req.setAttribute("CURRENT_TENANT_IDENTIFIER", pathVars.get("tenantid"));
 		}
+		System.out.println(">>>> MultiTenancyInterceptor: preHandle() - FIM");
 		return true;
 	}
 }

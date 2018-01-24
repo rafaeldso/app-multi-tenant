@@ -30,19 +30,23 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
 
 	@PostConstruct
 	public void load() {
+		System.out.println(">>>> DataSourceBasedMultiTenantConnectionProviderImpl: load() - Inicio/FIM");
 		map = new HashMap<>();
 		map.put("tenant_1", dataSource1);
 		map.put("tenant_2", dataSource2);
 		map.put("tenant_3", dataSource3);
+		System.out.println(">>>> DataSourceBasedMultiTenantConnectionProviderImpl: load() - FIM DataSource "+dataSource2.toString());
 	}
 
 	@Override
 	protected DataSource selectAnyDataSource() {
+		System.out.println(">>>> DataSourceBasedMultiTenantConnectionProviderImpl: selectAnyDataSource() - Inicio/FIM");
 		return map.get(DEFAULT_TENANT_ID);
 	}
 
 	@Override
 	protected DataSource selectDataSource(String tenantIdentifier) {
+		System.out.println(">>>> DataSourceBasedMultiTenantConnectionProviderImpl: selectDataSource() - Inicio/FIM");
 		return map.get(tenantIdentifier);
 	}
 }

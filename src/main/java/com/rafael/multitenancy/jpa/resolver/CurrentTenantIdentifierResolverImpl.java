@@ -12,8 +12,11 @@ public class CurrentTenantIdentifierResolverImpl implements CurrentTenantIdentif
 
 	@Override
 	public String resolveCurrentTenantIdentifier() {
+		System.out.println(">>>> CurrentTenantIdentifierResolverImpl: resolveCurrentTenantIdentifier() - Inicio/FIM");
 		RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+		
 		if (requestAttributes != null) {
+			System.out.println(">>>>> Request "+RequestContextHolder.getRequestAttributes().toString());
 			String identifier = (String) requestAttributes.getAttribute("CURRENT_TENANT_IDENTIFIER",
 					RequestAttributes.SCOPE_REQUEST);
 			if (identifier != null) {
@@ -25,6 +28,7 @@ public class CurrentTenantIdentifierResolverImpl implements CurrentTenantIdentif
 
 	@Override
 	public boolean validateExistingCurrentSessions() {
+		System.out.println(">>>> CurrentTenantIdentifierResolverImpl: validateExistingCurrentSessions() - Inicio/FIM");
 		return true;
 	}
 }

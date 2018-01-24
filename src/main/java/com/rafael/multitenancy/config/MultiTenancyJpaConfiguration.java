@@ -36,14 +36,16 @@ public class MultiTenancyJpaConfiguration {
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
+		System.out.println(">>>> MultiTenancyJpaConfiguration: entityManagerFactory() - Inicio");
 		Map<String, Object> hibernateProps = new LinkedHashMap<>();
 		hibernateProps.putAll(jpaProperties.getHibernateProperties(dataSource));
-
+		System.out.println("dataSource No MUlti TenancyJpa "+dataSource.toString());
 		hibernateProps.put(Environment.MULTI_TENANT, MultiTenancyStrategy.DATABASE);
 		hibernateProps.put(Environment.MULTI_TENANT_CONNECTION_PROVIDER, multiTenantConnectionProvider);
 		hibernateProps.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER, currentTenantIdentifierResolver);
 		hibernateProps.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
 
+		System.out.println(">>>> MultiTenancyJpaConfiguration: entityManagerFactory() - Fim");
 		return builder.dataSource(dataSource).packages(Empregado.class.getPackage().getName())
 				.properties(hibernateProps).jta(false).build();
 	}

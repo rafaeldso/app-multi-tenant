@@ -1,4 +1,4 @@
-package com.rafael.multitenancy;
+package com.rafael;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
